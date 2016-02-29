@@ -11,7 +11,7 @@ before_install:
 env:
  # - DJANGO_VERSION=1.6.5
  # - DJANGO_VERSION=1.7
- - DJANGO_VERSION=1.8.5
+ # - DJANGO_VERSION=1.8.5
  # - DJANGO_VERSION=1.9.2
 virtualenv:
  system_site_packages: false
@@ -24,7 +24,6 @@ install:
  - cd ..
  - CFLAGS=-I/usr/include/gdal pip install GDAL==1.11
  - pip install coveralls
- - pip install Django==$DJANGO_VERSION
  - python setup.py -q install
 script:
     coverage run --source etl_sync nosetests

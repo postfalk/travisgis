@@ -16,15 +16,16 @@ env:
 virtualenv:
  system_site_packages: false
 install: 
- - wget https://pypi.python.org/packages/source/p/pysqlite/pysqlite-2.6.3.tar.gz
- - tar xzf pysqlite-2.6.3.tar.gz
- - cd pysqlite-2.6.3
- - sed -i '/SQLITE_OMIT_LOAD_EXTENSION/d' setup.cfg
- - python setup.py install
- - cd ..
+ - if [[ $TRAVIS_PYTHON_VERSION == 2* ]]; 
+    wget https://pypi.python.org/packages/source/p/pysqlite/pysqlite-2.6.3.tar.gz;
+    then tar xzf pysqlite-2.6.3.tar.gz;
+    cd pysqlite-2.6.3;
+    sed -i '/SQLITE_OMIT_LOAD_EXTENSION/d' setup.cfg;
+    python setup.py install;
+    cd ..;
+    fi
  - CFLAGS=-I/usr/include/gdal pip install GDAL==1.11
  - pip install coveralls
- - python setup.py -q install
 script:
     coverage run --source etl_sync nosetests
 after_success:

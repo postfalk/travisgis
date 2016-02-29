@@ -1,5 +1,5 @@
 # travisgis
-Travis setup working with Python2, Python3, Spatialite, and GDAL
+Travis setup working with Python2, Python3, Spatialite, and GDAL on trusty
 
 [![Build Status][travis-image]][travis-link]
 [![Coverage Status][coveralls-image]][coveralls-link]

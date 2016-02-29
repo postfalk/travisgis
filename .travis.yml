@@ -25,7 +25,7 @@ install:
     cd ..;
     fi
  - CFLAGS=-I/usr/include/gdal pip install GDAL==1.11
- - pip install -r requirements
+ - pip install -r requirements.txt
  - pip install coveralls
 script:
     coverage run --source etl_sync nosetests

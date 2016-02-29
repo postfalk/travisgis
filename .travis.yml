@@ -28,6 +28,6 @@ install:
  - pip install -r requirements.txt
  - pip install coveralls
 script:
-    coverage run nosetests
+    nosetests --with-coverage --cover-tests travisgis
 after_success:
     coveralls

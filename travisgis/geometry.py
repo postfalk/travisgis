@@ -11,7 +11,7 @@ class Point(object):
         self.x = x
         self.y = y
 
-    def create_schema(self):
+    def connection(self):
         conn = sqlite3.connect('test.db')
         c = conn.cursor()
         try:
@@ -19,6 +19,10 @@ class Point(object):
             conn.load_extension('mod_spatialite')
         except:
             pass
+        return c
+
+    def create_schema(self):
+        c = self.connection()
         c.execute('SELECT InitSpatialMetadata()')
         sql = ("CREATE TABLE IF NOT EXISTS test ("
                "PK INTEGER PRIMARY KEY AUTOINCREMENT);")
@@ -28,11 +32,9 @@ class Point(object):
         c.execute(sql)
 
     def save(self):
-        conn = sqlite3.connect('test.db')
-        c = conn.cursor()
+        c = self.connection()
         sql = (
             "INSERT INTO test (geometry) "
             "VALUES (GeomFromText('POINT({} {})', 4326));".format(
                 self.x, self.y))
         c.execute(sql)
-

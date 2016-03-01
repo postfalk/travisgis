@@ -1,3 +1,4 @@
+import os
 from unittest import TestCase
 from sqlite3 import dbapi2 as db
 from travisgis.geometry import Point
@@ -17,7 +18,7 @@ class TestLibSpatialite(TestCase):
         self.obj.create_schema()
 
     def tearDown(self):
-        self.obj
+        os.remove('test.db')
 
     def test_database(self):
         self.obj.save()

@@ -13,7 +13,10 @@ class Point(object):
 
     def connection(self):
         conn = sqlite3.connect('test.db')
-        conn.enable_load_extension(True)
+        try:
+            conn.enable_load_extension(True)
+        except:
+            pass
         try:
             conn.load_extension('libspatialite.so')  # Ubuntu
         except sqlite3.OperationalError:

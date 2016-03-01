@@ -1,5 +1,5 @@
 try:
-    from pyspatialite import dbapi2 as sqlite3
+    from pysqlite2 import dbapi2 as sqlite3
 except ImportError:
     import sqlite3
 
@@ -13,10 +13,7 @@ class Point(object):
 
     def connection(self):
         conn = sqlite3.connect('test.db')
-        try:
-            conn.enable_load_extension(True)
-        except:
-            pass
+        conn.enable_load_extension(True)
         try:
             conn.load_extension('libspatialite.so')  # Ubuntu
         except sqlite3.OperationalError:

@@ -1,6 +1,5 @@
 import os
 from unittest import TestCase
-from sqlite3 import dbapi2 as db
 from travisgis.geometry import Point
 
 

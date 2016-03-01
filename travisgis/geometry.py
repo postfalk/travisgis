@@ -13,13 +13,15 @@ class Point(object):
 
     def connection(self):
         conn = sqlite3.connect('test.db')
-        c = conn.cursor()
+        conn.enable_load_extension(True)
         try:
-            conn.enable_load_extension(True)
-            conn.load_extension('mod_spatialite')
-        except:
-            pass
-        return c
+            conn.load_extension('libspatialite.so')  # Ubuntu
+        except sqlite3.OperationalError:
+            try:
+                conn.load_extension('mod_spatialite')  # OSX
+            except:
+                pass
+        return conn.cursor()
 
     def create_schema(self):
         c = self.connection()

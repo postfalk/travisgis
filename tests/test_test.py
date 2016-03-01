@@ -1,6 +1,6 @@
 from unittest import TestCase
 from sqlite3 import dbapi2 as db
-from travisgis.geometry import Geometry
+from travisgis.geometry import Point
 
 
 class TestNothing(TestCase):
@@ -13,8 +13,11 @@ class TestNothing(TestCase):
 class TestLibSpatialite(TestCase):
 
     def setUp(self):
-        self.obj = Geometry(None)
+        self.obj = Point('10', '20')
         self.obj.create_schema()
+
+    def tearDown(self):
+        self.obj
 
     def test_database(self):
         self.obj.save()

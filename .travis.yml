@@ -16,14 +16,12 @@ env:
 virtualenv:
  system_site_packages: false
 install: 
- - if [[ $TRAVIS_PYTHON_VERSION == 2* ]]; 
-    then wget https://pypi.python.org/packages/source/p/pysqlite/pysqlite-2.8.1.tar.gz &&
-    tar xzf pysqlite-2.8.1.tar.gz &&
-    cd pysqlite-2.8.1 &&
-    sed -i '/SQLITE_OMIT_LOAD_EXTENSION/d' setup.cfg &&
-    python setup.py install &&
-    cd .. 
-    fi
+ - wget https://pypi.python.org/packages/source/p/pysqlite/pysqlite-2.8.1.tar.gz &&
+ - tar xzf pysqlite-2.8.1.tar.gz &&
+ - cd pysqlite-2.8.1 &&
+ - sed -i '/SQLITE_OMIT_LOAD_EXTENSION/d' setup.cfg &&
+ - if [[ $TRAVIS_PYTHON_VERSION == 2* ]]; then python setup.py install; fi
+ - cd ..
  - CFLAGS=-I/usr/include/gdal pip install GDAL==1.11
  - pip install -r requirements.txt
  - pip install coveralls

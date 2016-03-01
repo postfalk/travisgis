@@ -2,13 +2,14 @@ try:
     from pyspatialite import dbapi2 as sqlite3
 except ImportError:
     import sqlite3
-from osgeo import ogr
 
-class Geometry(object):
+
+class Point(object):
     """Some simple spatial SQLite."""
 
-    def __init__(self, geom):
-        self.geom = geom
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
 
     def create_schema(self):
         conn = sqlite3.connect('test.db')
@@ -27,6 +28,11 @@ class Geometry(object):
         c.execute(sql)
 
     def save(self):
-        point = ogr.Geometry(ogr.wkbPoint)
-        point.AddPoint(1198054.34, 648493.09)
-        print(point.ExportToWkt())
+        conn = sqlite3.connect('test.db')
+        c = conn.cursor()
+        sql = (
+            "INSERT INTO test (geometry) "
+            "VALUES (GeomFromText('POINT({} {})', 4326));".format(
+                self.x, self.y))
+        c.execute(sql)
+

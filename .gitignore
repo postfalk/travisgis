@@ -1,0 +1,5 @@
+*.pyc
+
+.coverage
+test.db
+tests/__pycache__/

@@ -15,7 +15,7 @@ virtualenv:
   system_site_packages: true
 install: 
   - if [[ $TRAVIS_PYTHON_VERSION == 2* ]]; then pip install --global-option=build_ext --global-option='-USQLITE_OMIT_LOAD_EXTENSION' pysqlite; fi
-  - CFLAGS=-i/usr/include/gdal pip install GDAL==1.10
+  - CFLAGS=-I/usr/include/gdal pip install GDAL==1.10
   - pip install -r requirements.txt
   - pip install coveralls
 script:
